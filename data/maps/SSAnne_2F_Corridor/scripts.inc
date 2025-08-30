@@ -37,6 +37,10 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger::
 	call_if_eq VAR_STARTER_MON, 2, SSAnne_2F_Corridor_EventScript_RivalSquirtle
 	call_if_eq VAR_STARTER_MON, 1, SSAnne_2F_Corridor_EventScript_RivalBulbasaur
 	call_if_eq VAR_STARTER_MON, 0, SSAnne_2F_Corridor_EventScript_RivalCharmander
+	specialvar VAR_RESULT, IsArbokInTheParty
+	goto_if_eq VAR_RESULT, TRUE, SSAnne_2F_Corridor_EventScript_RivalSeeYourArbok
+	playbgm MUS_ENCOUNTER_RIVAL, 0
+	delay 10
 	msgbox SSAnne_2F_Corridor_Text_RivalPostBattle
 	closemessage
 	delay 10
@@ -47,6 +51,25 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger::
 	fadedefaultbgm
 	removeobject LOCALID_SS_ANNE_RIVAL
 	setvar VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1
+	releaseall
+	end
+
+SSAnne_2F_Corridor_EventScript_RivalSeeYourArbok::
+	playbgm MUS_ENCOUNTER_RIVAL, 0
+	delay 10
+	msgbox SSAnne_2F_Corridor_Text_RivalPostBattleWithArbokPart1
+	giveitem_msg SSAnne_2F_Corridor_Text_ReceivedFiftyMasterBall, ITEM_MASTER_BALL, 50
+	msgbox SSAnne_2F_Corridor_Text_RivalPostBattleWithArbokPart2
+	closemessage
+	delay 10
+	playbgm MUS_RIVAL_EXIT, 0
+	call_if_eq VAR_TEMP_1, 0, SSAnne_2F_Corridor_EventScript_RivalExitLeft
+	call_if_eq VAR_TEMP_1, 1, SSAnne_2F_Corridor_EventScript_RivalExitMid
+	call_if_eq VAR_TEMP_1, 2, SSAnne_2F_Corridor_EventScript_RivalExitRight
+	fadedefaultbgm
+	removeobject LOCALID_SS_ANNE_RIVAL
+	setvar VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1
+	setflag ARBOK_FLAG
 	releaseall
 	end
 

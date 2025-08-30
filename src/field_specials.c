@@ -2553,3 +2553,17 @@ static void Task_WingFlapSound(u8 taskId)
     if (data[0] == gSpecialVar_0x8004 - 1)
         DestroyTask(taskId);
 }
+
+bool8 IsArbokInTheParty(void)
+{
+    s32 i, value;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gPlayerParty[i];
+
+        if (GetMonData(mon, MON_DATA_SPECIES, NULL) == SPECIES_ARBOK)
+            return TRUE;
+    }
+    return FALSE;
+}
